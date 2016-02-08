@@ -1,4 +1,4 @@
-# React Starterkit
+# weather
 
 This react starter kit provides a prepared development environment based on [gulp](https://github.com/gulpjs/gulp), [SASS](http://sass-lang.com/) and [webpack](https://github.com/webpack/webpack). Data flow is made using [Flux](https://github.com/facebook/flux) dispatcher, the routing is managed with the [React-Router](https://github.com/rackt/react-router).
 
