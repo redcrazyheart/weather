@@ -1,0 +1,34 @@
+.icon {
+    width: 138px;
+    height: 122px;
+    background-size: cover;
+    display: block;
+
+    &.small {
+    	width: 55px;
+    	height: 50px;
+    }
+
+	&.cloudy_icon {
+		background-image: url('/images/weather_icons/cloudy.png');
+	}
+	&.rain_icon {
+		background-image: url('/images/weather_icons/rain.png');
+	}
+	&.partly_cloudy_icon {
+		background-image: url('/images/weather_icons/partly_cloudy.png');
+	}
+	&.snow_icon {
+		background-image: url('/images/weather_icons/snow.png');
+	}
+	&.sunny_icon {
+		background-image: url('/images/weather_icons/sunny.png');
+	}
+}
+
+.loader {
+	background-image: url('/images/loader.gif');
+	background-size: cover;
+	width: 50px;
+    height: 50px;
+}

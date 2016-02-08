@@ -1,7 +1,7 @@
 /**
- * ItemStore example
+ * CitySuggestStore
  *
- * @exports ItemStore singleton
+ * @exports CitySuggestStore singleton
  */
 
 import AbstractStore from '../stores/AbstractStore';
@@ -9,7 +9,7 @@ import AbstractStore from '../stores/AbstractStore';
 /**
  * @inheritdoc
  */
-export default class ItemStore extends AbstractStore {
+export default class CitySuggestStore extends AbstractStore {
   /**
    * @inheritdoc
    */
@@ -18,11 +18,11 @@ export default class ItemStore extends AbstractStore {
       /**
        * Load start
        */
-      'items:loadStart': () => {
+      'city:loadStart': () => {
         this
           .set('loading', true)
           .set('error', null)
-          .set('items', [])
+          .set('list', [])
           .trigger('change');
       },
       /**
@@ -30,11 +30,11 @@ export default class ItemStore extends AbstractStore {
        *
        * @param {array} items Items
        */
-      'items:loadSuccess': items => {
+      'city:loadSuccess': list => {
         this
           .set('loading', false)
           .set('error', null)
-          .set('items', items)
+          .set('list', list)
           .trigger('change');
       },
       /**
@@ -42,7 +42,7 @@ export default class ItemStore extends AbstractStore {
        *
        * @param {Error} error Error
        */
-      'items:loadError': error => {
+      'city:loadError': error => {
         this
           .reset()
           .set('error', error)
@@ -52,6 +52,6 @@ export default class ItemStore extends AbstractStore {
   }
 }
 
-const instance = new ItemStore();
+const instance = new CitySuggestStore();
 
 export default instance;

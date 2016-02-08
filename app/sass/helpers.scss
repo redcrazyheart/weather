@@ -1,18 +1,13 @@
-.hidden {
-  display: none !important;
-  visibility: hidden;
+.h_inline {
+  display: inline-block;
 }
 
-.clearfix {
-  zoom: 1;
+.h_flex_block {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
 
-  &:before
-  &:after {
-    content: "";
-    display: table;
-  }
-
-  &:after {
-    clear: both;
-  }
+.h_text_allign {
+  text-align: center;
 }

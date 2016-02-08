@@ -1,8 +1,14 @@
 import React from 'react';
+// Components
+import Loading from '../components/Loading.jsx';
+import Block from '../components/Block.jsx';
+
 import AbstractComponent from '../components/AbstractComponent.jsx';
-import ItemList from '../components/ItemList.jsx';
-import ItemStore from '../stores/ItemStore';
-import ItemActionCreator from '../creators/ItemActionCreator';
+import City from '../components/City.jsx';
+import WeatherList from '../components/WeatherList.jsx';
+// Store & Action
+import WeatherStore from '../stores/WeatherStore';
+import WeatherActionCreator from '../creators/WeatherActionCreator';
 
 class Home extends AbstractComponent {
   /**
@@ -13,9 +19,13 @@ class Home extends AbstractComponent {
 
     this.state = {
       /**
-      * Items
+      * List
       */
-      items : [],
+      list : [],
+      /**
+      * City
+      */
+      city : [],
       /**
       * Loading state
       */
@@ -29,7 +39,7 @@ class Home extends AbstractComponent {
   getStoresConfig() {
     return [
       {
-        store: ItemStore,
+        store: WeatherStore,
         eventName: 'change',
         callback: this.storeChangeHandler.bind(this),
       },
@@ -37,12 +47,13 @@ class Home extends AbstractComponent {
   }
 
   /**
-   * Items store change handler
+   * List store change handler
    */
   storeChangeHandler() {
     this.setState({
-      items: ItemStore.get('items'),
-      loading: ItemStore.get('loading'),
+      list: WeatherStore.get(['data', 'list']),
+      city: WeatherStore.get(['data', 'city']),
+      loading: WeatherStore.get('loading'),
     });
   }
 
@@ -51,8 +62,18 @@ class Home extends AbstractComponent {
    */
   componentDidMount() {
     super.componentDidMount();
+
+    let cityName = this.props.location.query.city;
+    if (cityName) {
+      WeatherActionCreator.loadWeather(cityName);
+    } else if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(data) {
+        WeatherActionCreator.loadWeather(null, data.coords);
+      });
+    } else {
+      WeatherActionCreator.loadWeather();
+    }
     
-    ItemActionCreator.loadItems();
   }
 
   /**
@@ -60,10 +81,12 @@ class Home extends AbstractComponent {
    */
   render() {
     return (
-      <div>
-        <h1>Home Page</h1>
-        <ItemList { ...this.state } />
-      </div>
+      <Block>
+        <Loading loading={this.state.loading}>
+          <City {...this.state.city}/>
+          <WeatherList list={this.state.list}/>
+        </Loading>
+      </Block>
     );
   }
 }
