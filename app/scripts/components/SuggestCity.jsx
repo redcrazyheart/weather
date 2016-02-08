@@ -3,8 +3,8 @@ import {Link} from 'react-router';
 
 const SuggestCity = (props) => {
 	let item = props.list.map((item) =>
-		<li className="c_gray" key={item.geonameId}>
-			<Link to={`/?city=${item.name}`}>{item.name}({item.countryName})</Link>
+		<li className="suggest c_gray" key={item.geonameId}>
+			<Link className="suggest_item" to={`/?city=${item.name}`}>{item.name}({item.countryName})</Link>
 		</li>
 	);
     return (

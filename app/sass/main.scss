@@ -94,6 +94,15 @@ ul {
   box-sizing: border-box;
 }
 
+.suggest {
+  padding: 0px;
+  &_item {
+    display: block;
+    padding: 10px 5px;
+  }
+}
+
+
 .weather {
   margin: 0px 0 20px 0;
 
